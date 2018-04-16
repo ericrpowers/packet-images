@@ -30,7 +30,8 @@ RUN curl -sSL https://get.docker.com/ | sh && \
   sudo sed -i -e 's/ExecStart=\/usr\/bin\/dockerd -H fd:\/\//ExecStart=\/usr\/bin\/dockerd --userland-proxy=false -H fd:\/\//g' /lib/systemd/system/docker.service
 
 # Misc setup
-RUN mkdir -p /home/apotests/.ssh && \
+RUN sudo sed -i -e 's/#MaxStartups 10:30:60/MaxSessions 10000\n#MaxStartups 10:30:60/g' /etc/ssh/sshd_config && \
+  mkdir -p /home/apotests/.ssh && \
   touch /home/apotests/.bash_profile && \
   touch /home/apotests/.cloud-warnings.skip
 ADD authorized_keys /home/apotests/.ssh/authorized_keys
