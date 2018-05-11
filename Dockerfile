@@ -35,4 +35,4 @@ RUN sudo sed -i -e 's/#MaxStartups 10:30:60/MaxSessions 10000\n#MaxStartups 10:3
   touch /home/apotests/.bash_profile && \
   touch /home/apotests/.cloud-warnings.skip
 ADD authorized_keys /home/apotests/.ssh/authorized_keys
-
+RUN chown -R apotests:apotests /home/apotests
